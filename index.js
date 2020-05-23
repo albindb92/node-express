@@ -3,6 +3,8 @@ const morgan = require ('morgan');
 
 const bodyParser = require ('body-parser');
 const dishRouter = require ('./routes/dishRouter');
+const promoRouter = require ('./routes/promoRouter');
+const leaderRouter = require ('./routes/leaderRouter');
 const hostname = 'localhost';
 const port = 3000;
 
@@ -11,8 +13,9 @@ const app = express ();
 app.use (morgan ('dev'));
 app.use (bodyParser.json ());
 app.use (express.static (__dirname + '/public'));
-app.use('/dishes', dishRouter);
-
+app.use('/dishes/:dishID', dishRouter);
+app.use('/promotions/:promo', promoRouter);
+app.use('/leaders/lead', leaderRouter);
 app.use ((req, res, next) => {
   console.log (req.headers);
   res.statusCode = 200;
